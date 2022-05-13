@@ -1,12 +1,22 @@
 extends Node2D
 
-onready var tongue : Line2D = $tongue as Line2D
+onready var tongue = $tongue
+onready var body = $body
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
-func _process(delta):
-	var mouse_position = tongue.get_local_mouse_position()
-	tongue.points[1] = mouse_position
+func _process(_delta):
+	if tongue.is_idle():
+		body.animation = "closed"
+	else:
+		body.animation = "open"
+	
+func _input(event):
+	if event is InputEventMouseButton:
+		tongue.set_target(event.position)
+		print("MOUSE_POS: ", event.position)
+		var screen_pos = get_viewport().canvas_transform.xform(tongue.position)
+		print("SCREEN_POS: ", screen_pos)
 	

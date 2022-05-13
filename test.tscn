@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/frog.png" type="Texture" id=1]
 [ext_resource path="res://assets/frog_open.png" type="Texture" id=2]
 [ext_resource path="res://frog.gd" type="Script" id=3]
+[ext_resource path="res://tongue.gd" type="Script" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -22,14 +23,17 @@ animations = [ {
 [node name="Frog" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
-[node name="Sprite" type="AnimatedSprite" parent="Frog"]
+[node name="body" type="AnimatedSprite" parent="Frog"]
 position = Vector2( 0, -32.328 )
 scale = Vector2( 0.5, 0.45 )
 frames = SubResource( 1 )
 animation = "open"
 
-[node name="tongue" type="Line2D" parent="Frog"]
-position = Vector2( 0, -44 )
+[node name="tongue" type="Node2D" parent="Frog"]
+position = Vector2( 0, -47 )
+script = ExtResource( 4 )
+
+[node name="line" type="Line2D" parent="Frog/tongue"]
 points = PoolVector2Array( 0, 0, 100, -100 )
 width = 7.0
 default_color = Color( 1, 0.380392, 0.380392, 1 )
