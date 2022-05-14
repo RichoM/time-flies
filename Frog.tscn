@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://frog.gd" type="Script" id=1]
+[ext_resource path="res://tongue.gd" type="Script" id=2]
+[ext_resource path="res://assets/frog.png" type="Texture" id=3]
+[ext_resource path="res://assets/frog_open.png" type="Texture" id=4]
+[ext_resource path="res://assets/circle.png" type="Texture" id=5]
+[ext_resource path="res://assets/active_marker.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "open",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "closed",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 80.6226
+
+[node name="Frog" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="body" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -32.328 )
+scale = Vector2( 0.5, 0.45 )
+frames = SubResource( 1 )
+animation = "open"
+
+[node name="tongue" type="Node2D" parent="."]
+position = Vector2( 0, -47 )
+script = ExtResource( 2 )
+
+[node name="line" type="Line2D" parent="tongue"]
+z_index = 100
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 7.0
+default_color = Color( 1, 0.380392, 0.380392, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="tip" type="Area2D" parent="tongue"]
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+collision_mask = 2
+
+[node name="sprite" type="Sprite" parent="tongue/tip"]
+modulate = Color( 1, 0.380392, 0.380392, 1 )
+z_index = 100
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tongue/tip"]
+shape = SubResource( 2 )
+
+[node name="marker" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0, 0.6, 1, 1 )
+position = Vector2( 0, 41 )
+scale = Vector2( 0.388, 0.344 )
+texture = ExtResource( 6 )
+
+[connection signal="area_entered" from="tongue/tip" to="tongue" method="_on_tip_area_entered"]
