@@ -53,6 +53,7 @@ func _on_tip_area_entered(area):
 	area.rotate(rand_range(0, TAU))
 	area.modulate = Color.red
 	area.z_index = 100
+	area.set_process(false)
 	bugs.append({
 		"offset": (area.global_position - tip.global_position) / 5,
 		"node": area,

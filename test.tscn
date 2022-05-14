@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/frog.png" type="Texture" id=1]
 [ext_resource path="res://assets/frog_open.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://tongue.gd" type="Script" id=4]
 [ext_resource path="res://assets/circle.png" type="Texture" id=5]
 [ext_resource path="res://assets/fly.png" type="Texture" id=6]
+[ext_resource path="res://fly.gd" type="Script" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -140,8 +141,9 @@ shape = SubResource( 2 )
 position = Vector2( -129, -167 )
 collision_layer = 2
 monitoring = false
+script = ExtResource( 7 )
 
-[node name="Sprite" type="Sprite" parent="fly"]
+[node name="sprite" type="Sprite" parent="fly"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
@@ -150,11 +152,12 @@ position = Vector2( -0.5, -0.5 )
 shape = SubResource( 3 )
 
 [node name="fly2" type="Area2D" parent="."]
-position = Vector2( -464, -382 )
+position = Vector2( -431, -275 )
 collision_layer = 2
 monitoring = false
+script = ExtResource( 7 )
 
-[node name="Sprite" type="Sprite" parent="fly2"]
+[node name="sprite" type="Sprite" parent="fly2"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
@@ -163,11 +166,12 @@ position = Vector2( -0.5, -0.5 )
 shape = SubResource( 3 )
 
 [node name="fly3" type="Area2D" parent="."]
-position = Vector2( -359, -218 )
+position = Vector2( -360, -410 )
 collision_layer = 2
 monitoring = false
+script = ExtResource( 7 )
 
-[node name="Sprite" type="Sprite" parent="fly3"]
+[node name="sprite" type="Sprite" parent="fly3"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
@@ -176,11 +180,12 @@ position = Vector2( -0.5, -0.5 )
 shape = SubResource( 3 )
 
 [node name="fly4" type="Area2D" parent="."]
-position = Vector2( -288, -394 )
+position = Vector2( -277, -288 )
 collision_layer = 2
 monitoring = false
+script = ExtResource( 7 )
 
-[node name="Sprite" type="Sprite" parent="fly4"]
+[node name="sprite" type="Sprite" parent="fly4"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
@@ -189,119 +194,16 @@ position = Vector2( -0.5, -0.5 )
 shape = SubResource( 3 )
 
 [node name="fly5" type="Area2D" parent="."]
-position = Vector2( -200, -288 )
+position = Vector2( -148, -389 )
 collision_layer = 2
 monitoring = false
+script = ExtResource( 7 )
 
-[node name="Sprite" type="Sprite" parent="fly5"]
+[node name="sprite" type="Sprite" parent="fly5"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fly5"]
-position = Vector2( -0.5, -0.5 )
-shape = SubResource( 3 )
-
-[node name="fly6" type="Area2D" parent="."]
-position = Vector2( 0, -393 )
-collision_layer = 2
-monitoring = false
-
-[node name="Sprite" type="Sprite" parent="fly6"]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fly6"]
-position = Vector2( -0.5, -0.5 )
-shape = SubResource( 3 )
-
-[node name="fly7" type="Area2D" parent="."]
-position = Vector2( 0, -272 )
-collision_layer = 2
-monitoring = false
-
-[node name="Sprite" type="Sprite" parent="fly7"]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fly7"]
-position = Vector2( -0.5, -0.5 )
-shape = SubResource( 3 )
-
-[node name="fly8" type="Area2D" parent="."]
-position = Vector2( 115, -188 )
-collision_layer = 2
-monitoring = false
-
-[node name="Sprite" type="Sprite" parent="fly8"]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fly8"]
-position = Vector2( -0.5, -0.5 )
-shape = SubResource( 3 )
-
-[node name="fly9" type="Area2D" parent="."]
-position = Vector2( 169, -328 )
-collision_layer = 2
-monitoring = false
-
-[node name="Sprite" type="Sprite" parent="fly9"]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fly9"]
-position = Vector2( -0.5, -0.5 )
-shape = SubResource( 3 )
-
-[node name="fly10" type="Area2D" parent="."]
-position = Vector2( 287, -144 )
-collision_layer = 2
-monitoring = false
-
-[node name="Sprite" type="Sprite" parent="fly10"]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fly10"]
-position = Vector2( -0.5, -0.5 )
-shape = SubResource( 3 )
-
-[node name="fly11" type="Area2D" parent="."]
-position = Vector2( 441, -222 )
-collision_layer = 2
-monitoring = false
-
-[node name="Sprite" type="Sprite" parent="fly11"]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fly11"]
-position = Vector2( -0.5, -0.5 )
-shape = SubResource( 3 )
-
-[node name="fly12" type="Area2D" parent="."]
-position = Vector2( 306, -295 )
-collision_layer = 2
-monitoring = false
-
-[node name="Sprite" type="Sprite" parent="fly12"]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fly12"]
-position = Vector2( -0.5, -0.5 )
-shape = SubResource( 3 )
-
-[node name="fly13" type="Area2D" parent="."]
-position = Vector2( 393, -403 )
-collision_layer = 2
-monitoring = false
-
-[node name="Sprite" type="Sprite" parent="fly13"]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fly13"]
 position = Vector2( -0.5, -0.5 )
 shape = SubResource( 3 )
 
