@@ -5,11 +5,11 @@ var y
 
 onready var freq = rand_range(2, 3)
 onready var amp = rand_range(10, 30)
-onready var vel = rand_range(25, 50)
+onready var vel = rand_range(45, 70)
 
 func _ready():
 	y = position.y
-	if randf() < 0.5:
+	if position.x > 0:
 		vel *= -1
 
 func _process(delta):
