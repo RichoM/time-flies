@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/frog.png" type="Texture" id=1]
 [ext_resource path="res://assets/frog_open.png" type="Texture" id=2]
 [ext_resource path="res://frog.gd" type="Script" id=3]
 [ext_resource path="res://tongue.gd" type="Script" id=4]
+[ext_resource path="res://assets/circle.png" type="Texture" id=5]
+[ext_resource path="res://assets/fly.png" type="Texture" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -18,7 +20,17 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="CircleShape2D" id=2]
+radius = 80.6226
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 21.5, 17.5 )
+
 [node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -185 )
+current = true
 
 [node name="Frog" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -34,12 +46,265 @@ position = Vector2( 0, -47 )
 script = ExtResource( 4 )
 
 [node name="line" type="Line2D" parent="Frog/tongue"]
-points = PoolVector2Array( 0, 0, 100, -100 )
+z_index = 100
+points = PoolVector2Array( 0, 0, 0, 0 )
 width = 7.0
 default_color = Color( 1, 0.380392, 0.380392, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, -185 )
-current = true
+[node name="tip" type="Area2D" parent="Frog/tongue"]
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+collision_mask = 2
+
+[node name="sprite" type="Sprite" parent="Frog/tongue/tip"]
+modulate = Color( 1, 0.380392, 0.380392, 1 )
+z_index = 100
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frog/tongue/tip"]
+shape = SubResource( 2 )
+
+[node name="Frog2" type="Node2D" parent="."]
+position = Vector2( -338, 5 )
+script = ExtResource( 3 )
+
+[node name="body" type="AnimatedSprite" parent="Frog2"]
+position = Vector2( 0, -32.328 )
+scale = Vector2( 0.5, 0.45 )
+frames = SubResource( 1 )
+animation = "open"
+
+[node name="tongue" type="Node2D" parent="Frog2"]
+position = Vector2( 0, -47 )
+script = ExtResource( 4 )
+
+[node name="line" type="Line2D" parent="Frog2/tongue"]
+z_index = 100
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 7.0
+default_color = Color( 1, 0.380392, 0.380392, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="tip" type="Area2D" parent="Frog2/tongue"]
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+collision_mask = 2
+
+[node name="sprite" type="Sprite" parent="Frog2/tongue/tip"]
+modulate = Color( 1, 0.380392, 0.380392, 1 )
+z_index = 100
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frog2/tongue/tip"]
+shape = SubResource( 2 )
+
+[node name="Frog3" type="Node2D" parent="."]
+position = Vector2( 315, 5 )
+script = ExtResource( 3 )
+
+[node name="body" type="AnimatedSprite" parent="Frog3"]
+position = Vector2( 0, -32.328 )
+scale = Vector2( 0.5, 0.45 )
+frames = SubResource( 1 )
+animation = "open"
+
+[node name="tongue" type="Node2D" parent="Frog3"]
+position = Vector2( 0, -47 )
+script = ExtResource( 4 )
+
+[node name="line" type="Line2D" parent="Frog3/tongue"]
+z_index = 100
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 7.0
+default_color = Color( 1, 0.380392, 0.380392, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="tip" type="Area2D" parent="Frog3/tongue"]
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+collision_mask = 2
+
+[node name="sprite" type="Sprite" parent="Frog3/tongue/tip"]
+modulate = Color( 1, 0.380392, 0.380392, 1 )
+z_index = 100
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frog3/tongue/tip"]
+shape = SubResource( 2 )
+
+[node name="fly" type="Area2D" parent="."]
+position = Vector2( -129, -167 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly2" type="Area2D" parent="."]
+position = Vector2( -464, -382 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly2"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly2"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly3" type="Area2D" parent="."]
+position = Vector2( -359, -218 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly3"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly3"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly4" type="Area2D" parent="."]
+position = Vector2( -288, -394 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly4"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly4"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly5" type="Area2D" parent="."]
+position = Vector2( -200, -288 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly5"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly5"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly6" type="Area2D" parent="."]
+position = Vector2( 0, -393 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly6"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly6"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly7" type="Area2D" parent="."]
+position = Vector2( 0, -272 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly7"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly7"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly8" type="Area2D" parent="."]
+position = Vector2( 115, -188 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly8"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly8"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly9" type="Area2D" parent="."]
+position = Vector2( 169, -328 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly9"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly9"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly10" type="Area2D" parent="."]
+position = Vector2( 287, -144 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly10"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly10"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly11" type="Area2D" parent="."]
+position = Vector2( 441, -222 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly11"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly11"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly12" type="Area2D" parent="."]
+position = Vector2( 306, -295 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly12"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly12"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[node name="fly13" type="Area2D" parent="."]
+position = Vector2( 393, -403 )
+collision_layer = 2
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="fly13"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly13"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 3 )
+
+[connection signal="area_entered" from="Frog/tongue/tip" to="Frog/tongue" method="_on_tip_area_entered"]
+[connection signal="area_entered" from="Frog2/tongue/tip" to="Frog2/tongue" method="_on_tip_area_entered"]
+[connection signal="area_entered" from="Frog3/tongue/tip" to="Frog3/tongue" method="_on_tip_area_entered"]
