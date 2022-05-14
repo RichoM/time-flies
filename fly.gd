@@ -20,10 +20,9 @@ func _process(delta):
 		scale.x += 2*delta
 		scale.y += 2*delta
 		modulate.a -= delta
+		if modulate.a <= 0.01:
+			get_parent().remove_child(self)
 		return
-		
-	if Input.is_action_just_pressed("ui_accept"):
-		fly_away()
 		
 	time += delta
 	position.y = y + sin(time * freq) * amp
