@@ -5,19 +5,28 @@ export(NodePath) var frogs_path
 export(float) var time = 60 * 1000
 
 var begin_time
+var started = false
 
 onready var index = 0
 onready var frogs = get_node(frogs_path).get_children()
 
 func _ready():
 	get_current_frog().set_current(true)
+	begin_start_sequence()
+	
+func begin_start_sequence():
+	$AnimationPlayer.play("start_sequence")
+
+func start_game():
+	started = true
 	begin_time = OS.get_ticks_msec()
 	
 func _process(delta):
 	check_tongues_crossing()
-	var elapsed = OS.get_ticks_msec() - begin_time
-	var remaining = time - elapsed
-	display_remaining(remaining)
+	if started:
+		var elapsed = OS.get_ticks_msec() - begin_time
+		var remaining = time - elapsed
+		display_remaining(remaining)
 	
 func display_remaining(remaining):
 	if remaining < 0:
@@ -37,6 +46,7 @@ func next_frog():
 	get_current_frog().set_current(true)
 
 func _input(event):
+	if !started: return
 	if event is InputEventMouseButton and event.is_pressed():
 		var frog = get_current_frog()
 		frog.set_target(event.position)
