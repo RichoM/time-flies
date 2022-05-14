@@ -1,6 +1,8 @@
 extends Node2D
 
-enum {IDLE, FWD, BWD}
+signal state_changed(prev_state, new_state)
+
+enum {IDLE, FWD, BWD, STUCK}
 var state =  IDLE
 var target : Vector2
 var vel : Vector2
@@ -12,19 +14,26 @@ onready var tip = $tip
 var frog
 onready var bugs = []
 
+var sticky = true
+
 func _ready():
 	line.points[1] = Vector2.ZERO
 	frog = get_parent()
 
 func is_idle():
 	return state == IDLE
+	
+func set_state(s):
+	var prev = state
+	state = s
+	emit_signal("state_changed", prev, state)
 
 func set_target(point):
 	if state != IDLE: return
 	var screen_pos = get_viewport().canvas_transform.xform(global_position)
 	target = point - screen_pos
 	vel = target.normalized() * speed
-	state = FWD
+	set_state(FWD)
 	line.points[1] = Vector2.ZERO
 	
 func _process(delta):
@@ -33,11 +42,12 @@ func _process(delta):
 	if state == FWD:
 		line.points[1] += (vel * delta)
 		if (target.distance_to(line.points[1]) < 10):
-			state = BWD
+			set_state(BWD)
 	if state == BWD:
 		line.points[1] -= (vel * delta)
 		if (Vector2.ZERO.distance_to(line.points[1]) < 10):
-			state = IDLE
+			set_state(IDLE)
+			sticky = true
 			eat_bugs()
 	tip.position = line.points[1]
 	for bug in bugs:
@@ -49,12 +59,25 @@ func eat_bugs():
 	bugs.clear()
 
 func _on_tip_area_entered(area):
+	if !sticky: return
 	area.set_deferred("monitorable", false)
 	area.rotate(rand_range(0, TAU))
-	area.modulate = Color.red
 	area.z_index = 100
 	area.set_process(false)
 	bugs.append({
 		"offset": (area.global_position - tip.global_position) / 5,
 		"node": area,
 	})
+	
+func release_bugs():
+	for bug in bugs:
+		var node = bug["node"]
+		node.fly_away()
+	bugs.clear()
+
+func tongue_crossing_at(point):
+	sticky = false
+	set_state(STUCK)
+	release_bugs()
+	yield(get_tree().create_timer(0.1), "timeout")
+	set_state(BWD)

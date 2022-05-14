@@ -3,6 +3,8 @@ extends Area2D
 var time = 0
 var y
 
+var flying_away = Vector2.ZERO
+
 onready var freq = rand_range(2, 3)
 onready var amp = rand_range(10, 30)
 onready var vel = rand_range(45, 70)
@@ -13,6 +15,16 @@ func _ready():
 		vel *= -1
 
 func _process(delta):
+	if flying_away != Vector2.ZERO:
+		position += flying_away * delta
+		scale.x += 2*delta
+		scale.y += 2*delta
+		modulate.a -= delta
+		return
+		
+	if Input.is_action_just_pressed("ui_accept"):
+		fly_away()
+		
 	time += delta
 	position.y = y + sin(time * freq) * amp
 	position.x += vel * delta
@@ -23,3 +35,8 @@ func _process(delta):
 		position.x *= -1
 	if vel < 0 and screen_pos.x < 0 - $sprite.texture.get_width():
 		position.x *= -1
+
+func fly_away():
+	set_process(true)
+	rotation_degrees = 0
+	flying_away = Vector2(rand_range(-500, 500), rand_range(-500, -50))

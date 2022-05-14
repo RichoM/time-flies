@@ -4,7 +4,7 @@
 [ext_resource path="res://level.gd" type="Script" id=8]
 [ext_resource path="res://Frog.tscn" type="PackedScene" id=9]
 
-[node name="Node2D" type="Node2D"]
+[node name="Level" type="Node2D"]
 script = ExtResource( 8 )
 frogs_path = NodePath("frogs")
 
@@ -14,10 +14,14 @@ current = true
 
 [node name="frogs" type="Node2D" parent="."]
 
-[node name="Frog" parent="frogs" instance=ExtResource( 9 )]
+[node name="Frog0" parent="frogs" instance=ExtResource( 9 )]
 position = Vector2( -250, 0 )
 
+[node name="Frog1" parent="frogs" instance=ExtResource( 9 )]
+position = Vector2( -83, 0 )
+
 [node name="Frog2" parent="frogs" instance=ExtResource( 9 )]
+position = Vector2( 83, 0 )
 
 [node name="Frog3" parent="frogs" instance=ExtResource( 9 )]
 position = Vector2( 250, 0 )
