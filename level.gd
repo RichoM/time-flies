@@ -2,11 +2,31 @@ extends Node2D
 
 export(NodePath) var frogs_path
 
+export(float) var time = 60 * 1000
+
+var begin_time
+
 onready var index = 0
 onready var frogs = get_node(frogs_path).get_children()
 
 func _ready():
 	get_current_frog().set_current(true)
+	begin_time = OS.get_ticks_msec()
+	
+func _process(delta):
+	check_tongues_crossing()
+	var elapsed = OS.get_ticks_msec() - begin_time
+	var remaining = time - elapsed
+	display_remaining(remaining)
+	
+func display_remaining(remaining):
+	if remaining < 0:
+		$GUI/remaining_time.text = "00:00"
+	else:
+		var minutes = int(remaining / 60 / 1000)
+		var seconds = int(remaining / 1000) % 60
+		var miliseconds = int(remaining) % 1000
+		$GUI/remaining_time.text = ("%02d" % minutes) + (":%02d" % seconds)
 
 func get_current_frog(): 
 	return frogs[index % frogs.size()]
@@ -35,6 +55,3 @@ func check_tongues_crossing():
 			if collision:
 				f0.tongue_collision(collision)
 				f1.tongue_collision(collision)
-		
-func _process(delta):
-	check_tongues_crossing()
