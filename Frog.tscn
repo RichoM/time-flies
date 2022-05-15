@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://frog.gd" type="Script" id=1]
 [ext_resource path="res://tongue.gd" type="Script" id=2]
@@ -135,9 +135,6 @@ shader_param/waves = 100.0
 [sub_resource type="Curve" id=20]
 _data = [ Vector2( 0, 0.618182 ), 0.0, -0.876136, 0, 0, Vector2( 0.607004, 1 ), 0.54334, 0.0, 0, 0, Vector2( 1, 0.809091 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=19]
-colors = PoolColorArray( 0.109804, 0.129412, 0.223529, 1, 1, 1, 1, 1 )
-
 [sub_resource type="CircleShape2D" id=2]
 radius = 80.6226
 
@@ -190,7 +187,6 @@ points = PoolVector2Array( 0, 0, 100, 0 )
 width = 30.0
 width_curve = SubResource( 20 )
 default_color = Color( 1, 1, 1, 1 )
-gradient = SubResource( 19 )
 texture = ExtResource( 7 )
 texture_mode = 1
 begin_cap_mode = 2
@@ -234,7 +230,7 @@ anims/appear = SubResource( 7 )
 [node name="marker" type="Sprite" parent="."]
 visible = false
 position = Vector2( 0, 47 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 11 )
 
 [connection signal="state_changed" from="tongue" to="." method="_on_tongue_state_changed"]
