@@ -51,6 +51,7 @@ func _process(delta):
 			sticky = true
 			eat_bugs()
 	tip.position = line.points[1]
+	tip.rotation = (line.points[1] - line.points[0]).angle()
 	for bug in bugs:
 		bug["node"].global_position = tip.global_position + bug["offset"]
 
