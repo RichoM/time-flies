@@ -47,6 +47,11 @@ func _process(delta):
 		var elapsed = OS.get_ticks_msec() - begin_time
 		var remaining = time - elapsed
 		display_remaining(remaining)
+		if remaining <= 0:
+			started = false
+			$GUI/score.visible = false
+			$GUI/remaining_time.visible = false
+			$GUI/center_label.text = "GAME OVER\nScore: " + str(total_score)
 	
 func display_remaining(remaining):
 	if remaining < 0:
