@@ -63,9 +63,11 @@ func end_game():
 	started = false
 	$GUI/score.visible = false
 	$GUI/remaining_time.visible = false
-	$GUI/center_label.text = "GAME OVER\nScore: " + str(total_score) + "\n"
-	$GUI/backdrop.visible = true
-	$GUI/restart.visible = true
+	$GameOver/message.text = "GAME OVER\nScore: " + str(total_score)
+	$GameOver/message.visible = true
+	$GameOver/restart_button.visible = true
+	$fly_spawner.visible = false
+	$frogs.visible = false
 	$music.stop()
 	$gameover_sfx.play()
 	
@@ -111,5 +113,5 @@ func check_tongues_crossing():
 				f1.tongue_collision(collision)
 
 
-func _on_restart_pressed():
+func _on_restart_button_pressed():
 	restart()
