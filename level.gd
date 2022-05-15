@@ -30,6 +30,8 @@ func update_score(frog, bugs : Array):
 		multiplier = 1
 	frog.display_points(score, multiplier)
 	total_score += score*multiplier
+	if total_score < 0:
+		total_score = 0
 	$GUI/score.text = str(total_score)
 
 func begin_start_sequence():
