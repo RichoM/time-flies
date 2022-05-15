@@ -81,5 +81,5 @@ func tongue_crossing_at(point):
 	sticky = false
 	set_state(STUCK)
 	release_bugs()
-	yield(get_tree().create_timer(0.1), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	set_state(BWD)
