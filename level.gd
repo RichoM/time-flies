@@ -12,6 +12,7 @@ onready var index = 0
 onready var frogs = get_node(frogs_path).get_children()
 
 func _ready():
+	randomize()
 	get_current_frog().set_current(true)
 	for frog in frogs:
 		frog.connect("bugs_eaten", self, "update_score")
