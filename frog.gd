@@ -2,6 +2,7 @@ extends Node2D
 
 onready var tongue = $tongue
 onready var body = $body
+onready var reflection = $reflection
 onready var marker = $marker
 
 export(float) var height = 0
@@ -79,6 +80,7 @@ func appear():
 
 func _process(delta):
 	body.material.set("shader_param/displacement", Vector2(0, height))
+	reflection.material.set("shader_param/displacement", Vector2(0, height))
 	if Input.is_action_just_pressed("ui_accept"):
 		display_points(int(rand_range(-100, 100)), 2)
 
