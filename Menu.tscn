@@ -74,5 +74,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="WallLeft" type="Polygon2D" parent="."]
+z_index = 1000
+polygon = PoolVector2Array( -529, -637, -529, 145, -1459, 145, -1459, -637 )
+
+[node name="WallRight" type="Polygon2D" parent="."]
+position = Vector2( 1987, 32 )
+z_index = 1000
+polygon = PoolVector2Array( -529, -637, -529, 145, -1459, 145, -1459, -637 )
+
 [connection signal="timeout" from="fly_spawner/timer" to="fly_spawner" method="_on_timer_timeout"]
 [connection signal="pressed" from="GUI/play" to="." method="_on_play_pressed"]
