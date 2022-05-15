@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://frog.gd" type="Script" id=1]
 [ext_resource path="res://tongue.gd" type="Script" id=2]
@@ -119,6 +119,13 @@ resource_local_to_scene = true
 shader = SubResource( 17 )
 shader_param/displacement = Vector2( 0, -0.201 )
 
+[sub_resource type="Curve" id=19]
+_data = [ Vector2( 0, 0.772727 ), 0.0, 0.0, 0, 0, Vector2( 0.988327, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=20]
+offsets = PoolRealArray( 0, 0.185841, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 0.380392, 0.380392, 1, 1, 0.380392, 0.380392, 1 )
+
 [sub_resource type="CircleShape2D" id=2]
 radius = 80.6226
 
@@ -169,13 +176,17 @@ stream = ExtResource( 4 )
 
 [node name="line" type="Line2D" parent="tongue"]
 z_index = 100
-points = PoolVector2Array( 0, 0, 0, 0 )
-width = 7.0
-default_color = Color( 1, 0.380392, 0.380392, 1 )
+points = PoolVector2Array( 0, 0, 100, 0 )
+width_curve = SubResource( 19 )
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 20 )
 begin_cap_mode = 2
 end_cap_mode = 2
+antialiased = true
 
 [node name="tip" type="Area2D" parent="tongue"]
+visible = false
+position = Vector2( 100, 0 )
 rotation = 3.14159
 scale = Vector2( 0.2, 0.2 )
 collision_mask = 2
