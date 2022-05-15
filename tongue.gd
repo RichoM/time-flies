@@ -35,6 +35,7 @@ func set_target(point):
 	vel = target.normalized() * speed
 	set_state(FWD)
 	line.points[1] = Vector2.ZERO
+	$sfx.play()
 	
 func _process(delta):
 	line.visible = !is_idle()
@@ -81,5 +82,6 @@ func tongue_crossing_at(point):
 	sticky = false
 	set_state(STUCK)
 	release_bugs()
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
 	set_state(BWD)
+	vel *= 3

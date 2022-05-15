@@ -3,8 +3,8 @@
 [ext_resource path="res://frog.gd" type="Script" id=1]
 [ext_resource path="res://tongue.gd" type="Script" id=2]
 [ext_resource path="res://assets/frogs.png" type="Texture" id=3]
+[ext_resource path="res://sfx/eat.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/circle.png" type="Texture" id=5]
-[ext_resource path="res://assets/active_marker.png" type="Texture" id=6]
 [ext_resource path="res://sfx/chomp.mp3" type="AudioStream" id=8]
 [ext_resource path="res://sfx/croak.mp3" type="AudioStream" id=9]
 
@@ -130,6 +130,9 @@ playing = true
 position = Vector2( 19, -39 )
 script = ExtResource( 2 )
 
+[node name="sfx" type="AudioStreamPlayer" parent="tongue"]
+stream = ExtResource( 4 )
+
 [node name="line" type="Line2D" parent="tongue"]
 z_index = 100
 points = PoolVector2Array( 0, 0, 0, 0 )
@@ -151,13 +154,6 @@ texture = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="tongue/tip"]
 shape = SubResource( 2 )
 
-[node name="marker" type="Sprite" parent="."]
-visible = false
-modulate = Color( 0, 0.6, 1, 1 )
-position = Vector2( 0, 41 )
-scale = Vector2( 0.388, 0.344 )
-texture = ExtResource( 6 )
-
 [node name="points" type="Position2D" parent="."]
 position = Vector2( 0, -81 )
 
@@ -172,6 +168,11 @@ volume_db = 6.638
 
 [node name="player" type="AnimationPlayer" parent="."]
 anims/appear = SubResource( 7 )
+
+[node name="marker" type="Polygon2D" parent="."]
+visible = false
+color = Color( 0, 0.156863, 1, 1 )
+polygon = PoolVector2Array( 0, 33, -17, 48, 16, 48 )
 
 [connection signal="state_changed" from="tongue" to="." method="_on_tongue_state_changed"]
 [connection signal="area_entered" from="tongue/tip" to="tongue" method="_on_tip_area_entered"]

@@ -17,6 +17,7 @@ func set_target(point):
 	tongue.set_target(point)
 	var target = get_viewport().canvas_transform.xform_inv(point)
 	set_flipped(target.x < position.x)
+	body.play("open")
 		
 func set_flipped(value):
 	body.flip_h = value
