@@ -9,7 +9,7 @@ var flying_away = Vector2.ZERO
 
 onready var freq = rand_range(2, 4)
 onready var amp = rand_range(20, 30)
-onready var vel = rand_range(60, 70)
+onready var vel = rand_range(35, 60)
 
 func _ready():
 	y = position.y
