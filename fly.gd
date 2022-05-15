@@ -33,9 +33,9 @@ func _process(delta):
 	
 	var screen_pos = get_viewport().canvas_transform.xform(global_position)
 	var screen_rect = get_viewport_rect()
-	if vel > 0 and screen_pos.x > screen_rect.size.x + $sprite.texture.get_width():
+	if vel > 0 and screen_pos.x > screen_rect.size.x + 25:
 		position.x *= -1
-	if vel < 0 and screen_pos.x < 0 - $sprite.texture.get_width():
+	if vel < 0 and screen_pos.x < 0 - 25:
 		position.x *= -1
 
 func fly_away():
