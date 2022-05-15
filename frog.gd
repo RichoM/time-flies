@@ -4,6 +4,8 @@ onready var tongue = $tongue
 onready var body = $body
 onready var marker = $marker
 
+export(float) var height = 0
+
 var disabled = false
 
 signal bugs_eaten(frog, bugs)
@@ -33,7 +35,7 @@ func get_tongue_segment():
 	return [p0, p1]
 
 func tongue_collision(point):
-	if !tongue.sticky: return	
+	if !tongue.sticky: return
 	tongue.tongue_crossing_at(point)
 	take_damage()
 	
@@ -45,7 +47,6 @@ func take_damage():
 	modulate = Color.white
 	disabled = false
 	body.animation = "closed"
-
 	
 func display_points(points, multiplier):
 	var point_msg = preload("res://points.tscn").instance()
@@ -60,7 +61,11 @@ func display_points(points, multiplier):
 	else:
 		$eat_sfx.play(0)
 	
+func appear():
+	$player.play("appear", -1, 0.75)
+
 func _process(delta):
+	body.material.set("shader_param/displacement", Vector2(0, height))
 	if Input.is_action_just_pressed("ui_accept"):
 		display_points(int(rand_range(-100, 100)), 2)
 

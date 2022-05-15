@@ -66,6 +66,8 @@ func end_game():
 	$GUI/center_label.text = "GAME OVER\nScore: " + str(total_score) + "\n"
 	$GUI/backdrop.visible = true
 	$GUI/restart.visible = true
+	$music.stop()
+	$gameover_sfx.play()
 	
 func restart():
 	get_tree().reload_current_scene()

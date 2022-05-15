@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://frog.gd" type="Script" id=1]
 [ext_resource path="res://tongue.gd" type="Script" id=2]
@@ -9,6 +9,25 @@
 [ext_resource path="res://assets/frog_sad.png" type="Texture" id=7]
 [ext_resource path="res://sfx/chomp.mp3" type="AudioStream" id=8]
 [ext_resource path="res://sfx/croak.mp3" type="AudioStream" id=9]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform vec2 displacement;
+
+void fragment() {
+	vec2 p = UV + displacement;
+	if (p.y < 0.0) discard;
+	else {
+		COLOR = texture(TEXTURE, UV + displacement);
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/displacement = Vector2( 0, 0 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -41,10 +60,27 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=2]
 radius = 80.6226
 
+[sub_resource type="Animation" id=7]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -1.0, 0.0 ]
+}
+
 [node name="Frog" type="Node2D"]
 script = ExtResource( 1 )
+height = -1.0
 
 [node name="body" type="AnimatedSprite" parent="."]
+material = SubResource( 8 )
 position = Vector2( 0, -32.328 )
 scale = Vector2( 0.5, 0.45 )
 frames = SubResource( 1 )
@@ -94,6 +130,9 @@ pitch_scale = 1.19
 [node name="eat_sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = 6.638
+
+[node name="player" type="AnimationPlayer" parent="."]
+anims/appear = SubResource( 7 )
 
 [connection signal="state_changed" from="tongue" to="." method="_on_tongue_state_changed"]
 [connection signal="area_entered" from="tongue/tip" to="tongue" method="_on_tip_area_entered"]
