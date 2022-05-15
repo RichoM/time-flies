@@ -41,7 +41,7 @@ func _process(delta):
 	tip.visible = line.visible
 	if state == FWD:
 		line.points[1] += (vel * delta)
-		if (target.distance_to(line.points[1]) < 10):
+		if (line.points[0].distance_to(line.points[1]) > 450):
 			set_state(BWD)
 	if state == BWD:
 		line.points[1] -= (vel * delta)

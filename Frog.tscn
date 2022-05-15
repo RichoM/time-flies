@@ -52,7 +52,6 @@ playing = true
 [node name="tongue" type="Node2D" parent="."]
 position = Vector2( 0, -47 )
 script = ExtResource( 2 )
-speed = 650
 
 [node name="line" type="Line2D" parent="tongue"]
 z_index = 100
