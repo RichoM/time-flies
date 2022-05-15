@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://frog.gd" type="Script" id=1]
 [ext_resource path="res://tongue.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/circle.png" type="Texture" id=5]
 [ext_resource path="res://assets/active_marker.png" type="Texture" id=6]
 [ext_resource path="res://assets/frog_sad.png" type="Texture" id=7]
+[ext_resource path="res://sfx/chomp.mp3" type="AudioStream" id=8]
+[ext_resource path="res://sfx/croak.mp3" type="AudioStream" id=9]
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -83,6 +85,15 @@ texture = ExtResource( 6 )
 
 [node name="points" type="Position2D" parent="."]
 position = Vector2( 0, -81 )
+
+[node name="hurt_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = 16.227
+pitch_scale = 1.19
+
+[node name="eat_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = 6.638
 
 [connection signal="state_changed" from="tongue" to="." method="_on_tongue_state_changed"]
 [connection signal="area_entered" from="tongue/tip" to="tongue" method="_on_tip_area_entered"]

@@ -38,12 +38,14 @@ func tongue_collision(point):
 	take_damage()
 	
 func take_damage():
+	$hurt_sfx.play(0)
 	body.play("sad")
 	disabled = true
 	yield(get_tree().create_timer(2), "timeout")
 	modulate = Color.white
 	disabled = false
 	body.animation = "closed"
+
 	
 func display_points(points, multiplier):
 	var point_msg = preload("res://points.tscn").instance()
@@ -55,6 +57,8 @@ func display_points(points, multiplier):
 	point_msg.show_msg(msg, Color.green if points > 0 else Color.red)
 	if points < 0:
 		take_damage()
+	else:
+		$eat_sfx.play(0)
 	
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
