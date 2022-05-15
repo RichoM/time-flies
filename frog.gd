@@ -81,8 +81,6 @@ func appear():
 func _process(delta):
 	body.material.set("shader_param/displacement", Vector2(0, height))
 	reflection.material.set("shader_param/displacement", Vector2(0, height))
-	if Input.is_action_just_pressed("ui_accept"):
-		display_points(int(rand_range(-100, 100)), 2)
 
 func _on_tongue_state_changed(prev_state, new_state):
 	if disabled: return
