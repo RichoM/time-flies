@@ -57,10 +57,18 @@ func _process(delta):
 		var remaining = time - elapsed
 		display_remaining(remaining)
 		if remaining <= 0:
-			started = false
-			$GUI/score.visible = false
-			$GUI/remaining_time.visible = false
-			$GUI/center_label.text = "GAME OVER\nScore: " + str(total_score)
+			end_game()
+			
+func end_game():
+	started = false
+	$GUI/score.visible = false
+	$GUI/remaining_time.visible = false
+	$GUI/center_label.text = "GAME OVER\nScore: " + str(total_score) + "\n"
+	$GUI/backdrop.visible = true
+	$GUI/restart.visible = true
+	
+func restart():
+	get_tree().reload_current_scene()
 	
 func display_remaining(remaining):
 	if remaining < 0:
@@ -99,3 +107,7 @@ func check_tongues_crossing():
 			if collision:
 				f0.tongue_collision(collision)
 				f1.tongue_collision(collision)
+
+
+func _on_restart_pressed():
+	restart()
