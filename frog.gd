@@ -12,6 +12,14 @@ signal bugs_eaten(frog, bugs)
 
 func set_target(point):
 	tongue.set_target(point)
+	var target = get_viewport().canvas_transform.xform_inv(point)
+	if target.x < position.x:
+		body.flip_h = true
+		tongue.position.x = -19
+	else:
+		body.flip_h = false
+		tongue.position.x = 19
+	
 	
 func eat(bugs):
 	var penalty = false
@@ -37,11 +45,11 @@ func get_tongue_segment():
 func tongue_collision(point):
 	if !tongue.sticky: return
 	tongue.tongue_crossing_at(point)
-	take_damage()
+	take_damage(false)
 	
-func take_damage():
+func take_damage(hurt : bool):
 	$hurt_sfx.play(0)
-	body.play("sad")
+	body.play("hurt" if hurt else "sad")
 	disabled = true
 	yield(get_tree().create_timer(2), "timeout")
 	modulate = Color.white
@@ -57,9 +65,12 @@ func display_points(points, multiplier):
 		msg += "\nx" + str(multiplier)
 	point_msg.show_msg(msg, Color.green if points > 0 else Color.red)
 	if points < 0:
-		take_damage()
+		take_damage(points < -10)
 	else:
 		$eat_sfx.play(0)
+		body.play("eating")
+		yield(get_tree().create_timer(1), "timeout")
+		body.play("closed")
 	
 func appear():
 	$player.play("appear", -1, 0.75)

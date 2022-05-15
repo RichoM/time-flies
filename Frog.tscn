@@ -1,12 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://frog.gd" type="Script" id=1]
 [ext_resource path="res://tongue.gd" type="Script" id=2]
-[ext_resource path="res://assets/frog.png" type="Texture" id=3]
-[ext_resource path="res://assets/frog_open.png" type="Texture" id=4]
+[ext_resource path="res://assets/frogs.png" type="Texture" id=3]
 [ext_resource path="res://assets/circle.png" type="Texture" id=5]
 [ext_resource path="res://assets/active_marker.png" type="Texture" id=6]
-[ext_resource path="res://assets/frog_sad.png" type="Texture" id=7]
 [ext_resource path="res://sfx/chomp.mp3" type="AudioStream" id=8]
 [ext_resource path="res://sfx/croak.mp3" type="AudioStream" id=9]
 
@@ -18,6 +16,7 @@ uniform vec2 displacement;
 void fragment() {
 	vec2 p = UV + displacement;
 	if (p.y < 0.0) discard;
+	if (p.y > 1.0) discard;
 	else {
 		COLOR = texture(TEXTURE, UV + displacement);
 	}
@@ -29,31 +28,71 @@ resource_local_to_scene = true
 shader = SubResource( 5 )
 shader_param/displacement = Vector2( 0, 0 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=9]
 flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 188, 207 )
+atlas = ExtResource( 3 )
+region = Rect2( 500, 0, 250, 250 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=12]
 flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 188, 0, 188, 207 )
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 250, 250 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 250, 0, 250, 250 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 250, 250 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 1000, 0, 250, 250 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 1250, 0, 250, 250 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 750, 0, 250, 250 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 1000, 0, 250, 250 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "open",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "eating",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 16 ) ],
 "loop": true,
 "name": "closed",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "sad",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "hurt",
 "speed": 5.0
 } ]
 
@@ -82,13 +121,13 @@ height = -1.0
 [node name="body" type="AnimatedSprite" parent="."]
 material = SubResource( 8 )
 position = Vector2( 0, -32.328 )
-scale = Vector2( 0.5, 0.45 )
+scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 1 )
 animation = "closed"
 playing = true
 
 [node name="tongue" type="Node2D" parent="."]
-position = Vector2( 0, -47 )
+position = Vector2( 19, -39 )
 script = ExtResource( 2 )
 
 [node name="line" type="Line2D" parent="tongue"]
