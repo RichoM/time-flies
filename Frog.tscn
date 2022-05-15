@@ -124,7 +124,7 @@ _data = [ Vector2( 0, 0.772727 ), 0.0, 0.0, 0, 0, Vector2( 0.988327, 1 ), 0.0, 0
 
 [sub_resource type="Gradient" id=20]
 offsets = PoolRealArray( 0, 0.185841, 1 )
-colors = PoolColorArray( 0, 0, 0, 1, 1, 0.380392, 0.380392, 1, 1, 0.380392, 0.380392, 1 )
+colors = PoolColorArray( 0.109804, 0.129412, 0.223529, 1, 1, 0.380392, 0.380392, 1, 1, 0.380392, 0.380392, 1 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 80.6226
