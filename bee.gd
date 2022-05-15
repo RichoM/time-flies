@@ -15,7 +15,7 @@ func _ready():
 	y = position.y
 	if position.x > 0:
 		vel *= -1
-	$sprite.flip_h = vel < 0
+	$sprite.flip_h = vel > 0
 
 func _process(delta):
 	if flying_away != Vector2.ZERO:
@@ -33,9 +33,9 @@ func _process(delta):
 	
 	var screen_pos = get_viewport().canvas_transform.xform(global_position)
 	var screen_rect = get_viewport_rect()
-	if vel > 0 and screen_pos.x > screen_rect.size.x + $sprite.texture.get_width():
+	if vel > 0 and screen_pos.x > screen_rect.size.x + 25:
 		get_parent().remove_child(self)
-	if vel < 0 and screen_pos.x < 0 - $sprite.texture.get_width():
+	if vel < 0 and screen_pos.x < 0 - 25:
 		get_parent().remove_child(self)
 
 func fly_away():
