@@ -40,6 +40,7 @@ func set_target(point):
 func _process(delta):
 	line.visible = !is_idle()
 	tip.visible = line.visible
+	tip.monitoring = tip.visible
 	if state == FWD:
 		line.points[1] += (vel * delta)
 		if (line.points[0].distance_to(line.points[1]) > 450):

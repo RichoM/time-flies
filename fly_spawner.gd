@@ -13,7 +13,7 @@ func spawn_new_fly():
 		x = -25
 	else:
 		x = get_viewport_rect().size.x + 25
-	var y = rand_range(50, get_viewport_rect().size.y - 250)
+	var y = rand_range(50, get_viewport_rect().size.y * 0.6)
 	bug.global_transform.origin = get_viewport().canvas_transform.xform_inv(Vector2(x, y))
 	add_child(bug)
 
