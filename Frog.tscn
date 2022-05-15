@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://frog.gd" type="Script" id=1]
 [ext_resource path="res://tongue.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/tongue.png" type="Texture" id=7]
 [ext_resource path="res://sfx/chomp.mp3" type="AudioStream" id=8]
 [ext_resource path="res://sfx/croak.mp3" type="AudioStream" id=9]
+[ext_resource path="res://assets/black.png" type="Texture" id=10]
 
 [sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
@@ -50,16 +51,6 @@ flags = 16
 atlas = ExtResource( 3 )
 region = Rect2( 1000, 0, 250, 250 )
 
-[sub_resource type="AtlasTexture" id=14]
-flags = 16
-atlas = ExtResource( 3 )
-region = Rect2( 1000, 0, 250, 250 )
-
-[sub_resource type="AtlasTexture" id=15]
-flags = 16
-atlas = ExtResource( 3 )
-region = Rect2( 1250, 0, 250, 250 )
-
 [sub_resource type="AtlasTexture" id=12]
 flags = 16
 atlas = ExtResource( 3 )
@@ -69,6 +60,16 @@ region = Rect2( 0, 0, 250, 250 )
 flags = 16
 atlas = ExtResource( 3 )
 region = Rect2( 250, 0, 250, 250 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 16
+atlas = ExtResource( 3 )
+region = Rect2( 1000, 0, 250, 250 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 16
+atlas = ExtResource( 3 )
+region = Rect2( 1250, 0, 250, 250 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -87,14 +88,14 @@ animations = [ {
 "name": "hurt",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 14 ), SubResource( 15 ) ],
-"loop": true,
-"name": "sad",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
 "name": "eating",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "sad",
 "speed": 5.0
 } ]
 
@@ -119,6 +120,9 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource( 17 )
 shader_param/displacement = Vector2( 0, -0.201 )
+
+[sub_resource type="Curve" id=20]
+_data = [ Vector2( 0, 0.618182 ), 0.0, -0.876136, 0, 0, Vector2( 0.607004, 1 ), 0.54334, 0.0, 0, 0, Vector2( 1, 0.809091 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=19]
 colors = PoolColorArray( 0.109804, 0.129412, 0.223529, 1, 1, 1, 1, 1 )
@@ -150,7 +154,7 @@ material = SubResource( 8 )
 position = Vector2( 0, -32.328 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 1 )
-animation = "closed"
+animation = "open"
 playing = true
 
 [node name="reflection" type="Sprite" parent="."]
@@ -174,7 +178,8 @@ stream = ExtResource( 4 )
 [node name="line" type="Line2D" parent="tongue"]
 z_index = 100
 points = PoolVector2Array( 0, 0, 100, 0 )
-width = 20.0
+width = 30.0
+width_curve = SubResource( 20 )
 default_color = Color( 1, 1, 1, 1 )
 gradient = SubResource( 19 )
 texture = ExtResource( 7 )
@@ -183,9 +188,15 @@ begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
 
+[node name="black" type="Sprite" parent="tongue/line"]
+visible = false
+scale = Vector2( 0.5, 0.5 )
+z_index = 150
+texture = ExtResource( 10 )
+
 [node name="tip" type="Area2D" parent="tongue"]
 position = Vector2( 100, 0 )
-scale = Vector2( 0.3, 0.2 )
+scale = Vector2( 0.5, 0.3 )
 collision_mask = 2
 
 [node name="sprite" type="Sprite" parent="tongue/tip"]
