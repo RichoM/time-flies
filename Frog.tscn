@@ -82,5 +82,8 @@ position = Vector2( 0, 41 )
 scale = Vector2( 0.388, 0.344 )
 texture = ExtResource( 6 )
 
+[node name="points" type="Position2D" parent="."]
+position = Vector2( 0, -81 )
+
 [connection signal="state_changed" from="tongue" to="." method="_on_tongue_state_changed"]
 [connection signal="area_entered" from="tongue/tip" to="tongue" method="_on_tip_area_entered"]

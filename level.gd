@@ -6,14 +6,32 @@ export(float) var time = 60 * 1000
 
 var begin_time
 var started = false
+var total_score = 0
 
 onready var index = 0
 onready var frogs = get_node(frogs_path).get_children()
 
 func _ready():
 	get_current_frog().set_current(true)
+	for frog in frogs:
+		frog.connect("bugs_eaten", self, "update_score")
 	begin_start_sequence()
-	
+
+func update_score(frog, bugs : Array):
+	# TODO(Richo): Change score by bug type
+	var count = bugs.size()
+	var score
+	var multiplier
+	if count > 0:
+		score = count * 10
+		multiplier = count
+	else:
+		score = -10
+		multiplier = 1
+	frog.display_points(score, multiplier)
+	total_score += score*multiplier
+	$GUI/score.text = str(total_score)
+
 func begin_start_sequence():
 	$AnimationPlayer.play("start_sequence")
 

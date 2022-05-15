@@ -54,8 +54,10 @@ func _process(delta):
 		bug["node"].global_position = tip.global_position + bug["offset"]
 
 func eat_bugs():
+	var actual_bugs = []
 	for bug in bugs:
-		frog.eat(bug["node"])
+		actual_bugs.append(bug["node"])
+	frog.eat(actual_bugs)
 	bugs.clear()
 
 func _on_tip_area_entered(area):
