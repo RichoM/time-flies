@@ -13,7 +13,6 @@ onready var frogs = get_node(frogs_path).get_children()
 
 func _ready():
 	randomize()
-	get_current_frog().set_current(true)
 	for frog in frogs:
 		frog.connect("bugs_eaten", self, "update_score")
 	begin_start_sequence()
@@ -49,6 +48,7 @@ func begin_start_sequence():
 func start_game():
 	started = true
 	begin_time = OS.get_ticks_msec()
+	get_current_frog().set_current(true)
 	
 func _process(delta):
 	check_tongues_crossing()
