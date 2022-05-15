@@ -10,16 +10,17 @@ var disabled = false
 
 signal bugs_eaten(frog, bugs)
 
+func _ready():
+	set_flipped(position.x > 0)
+
 func set_target(point):
 	tongue.set_target(point)
 	var target = get_viewport().canvas_transform.xform_inv(point)
-	if target.x < position.x:
-		body.flip_h = true
-		tongue.position.x = -19
-	else:
-		body.flip_h = false
-		tongue.position.x = 19
-	
+	set_flipped(target.x < position.x)
+		
+func set_flipped(value):
+	body.flip_h = value
+	tongue.position.x = -19 if value else 19	
 	
 func eat(bugs):
 	var penalty = false
