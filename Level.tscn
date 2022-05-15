@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://fly_spawner.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/background.png" type="Texture" id=4]
 [ext_resource path="res://assets/juncos.png" type="Texture" id=5]
+[ext_resource path="res://music/01-Menu-loop.ogg" type="AudioStream" id=6]
 [ext_resource path="res://level.gd" type="Script" id=8]
 [ext_resource path="res://Frog.tscn" type="PackedScene" id=9]
 
@@ -36,6 +37,18 @@ tracks/1/keys = {
 "args": [  ],
 "method": "start_game"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="DynamicFont" id=1]
@@ -69,6 +82,9 @@ current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/start_sequence = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [node name="frogs" type="Node2D" parent="."]
 
