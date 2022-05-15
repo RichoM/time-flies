@@ -1,6 +1,6 @@
 extends Area2D
 
-export var points = -10
+export var points = -30
 
 var time = 0
 var y
