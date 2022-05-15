@@ -12,8 +12,15 @@ func set_target(point):
 	tongue.set_target(point)
 	
 func eat(bugs):
+	var penalty = false
 	for bug in bugs:
-		bug.get_parent().remove_child(bug)
+		if bug.points < 0:
+			penalty = true
+	for bug in bugs:
+		if penalty:
+			bug.fly_away()
+		else:
+			bug.get_parent().remove_child(bug)
 	emit_signal("bugs_eaten", self, bugs)
 
 func set_current(val):
@@ -26,10 +33,13 @@ func get_tongue_segment():
 	return [p0, p1]
 
 func tongue_collision(point):
-	if !tongue.sticky: return
+	if !tongue.sticky: return	
+	tongue.tongue_crossing_at(point)
+	take_damage()
+	
+func take_damage():
 	body.play("sad")
 	disabled = true
-	tongue.tongue_crossing_at(point)
 	yield(get_tree().create_timer(2), "timeout")
 	modulate = Color.white
 	disabled = false
@@ -43,6 +53,8 @@ func display_points(points, multiplier):
 	if multiplier > 1:
 		msg += "\nx" + str(multiplier)
 	point_msg.show_msg(msg, Color.green if points > 0 else Color.red)
+	if points < 0:
+		take_damage()
 	
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):

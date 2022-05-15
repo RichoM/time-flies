@@ -20,11 +20,19 @@ func _ready():
 func update_score(frog, bugs : Array):
 	# TODO(Richo): Change score by bug type
 	var count = bugs.size()
-	var score
+	var score = 0
 	var multiplier
 	if count > 0:
-		score = count * 10
-		multiplier = count
+		var damage = 0
+		for bug in bugs:
+			if bug.points < 0:
+				damage += bug.points
+			score += bug.points
+		if damage != 0:
+			score = damage
+			multiplier = 1
+		else:
+			multiplier = count
 	else:
 		score = -10
 		multiplier = 1

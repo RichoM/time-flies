@@ -1,15 +1,15 @@
 extends Area2D
 
-export var points = 10 
+export var points = -10
 
 var time = 0
 var y
 
 var flying_away = Vector2.ZERO
 
-onready var freq = rand_range(2, 3)
-onready var amp = rand_range(10, 30)
-onready var vel = rand_range(45, 70)
+onready var freq = rand_range(2, 4)
+onready var amp = rand_range(20, 30)
+onready var vel = rand_range(60, 70)
 
 func _ready():
 	y = position.y
@@ -42,3 +42,4 @@ func fly_away():
 	set_process(true)
 	rotation_degrees = 0
 	flying_away = Vector2(rand_range(-500, 500), rand_range(-500, -50))
+	$sprite.flip_h = flying_away.x < 0
