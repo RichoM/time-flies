@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://fly_spawner.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Tomorrow-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://fonts/CatV_6x12_9.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/background.png" type="Texture" id=4]
+[ext_resource path="res://assets/juncos.png" type="Texture" id=5]
 [ext_resource path="res://level.gd" type="Script" id=8]
 [ext_resource path="res://Frog.tscn" type="PackedScene" id=9]
 
@@ -52,6 +54,11 @@ font_data = ExtResource( 3 )
 script = ExtResource( 8 )
 frogs_path = NodePath("frogs")
 
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 0, -226 )
+scale = Vector2( 0.88, 0.88 )
+texture = ExtResource( 4 )
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -225 )
 current = true
@@ -78,6 +85,12 @@ script = ExtResource( 1 )
 
 [node name="timer" type="Timer" parent="fly_spawner"]
 autostart = true
+
+[node name="Foreground" type="Sprite" parent="."]
+position = Vector2( 0, -226 )
+scale = Vector2( 0.88, 0.88 )
+z_index = 300
+texture = ExtResource( 5 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
