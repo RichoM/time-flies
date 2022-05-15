@@ -16,7 +16,7 @@ uniform vec2 displacement;
 void fragment() {
 	vec2 p = UV + displacement;
 	if (p.y < 0.0) discard;
-	if (p.y > 1.0) discard;
+	if (displacement.y < 0.0 && UV.y > 0.75) discard;
 	else {
 		COLOR = texture(TEXTURE, UV + displacement);
 	}
