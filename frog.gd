@@ -15,6 +15,7 @@ func _ready():
 	set_flipped(position.x > 0)
 
 func set_target(point):
+	if disabled: return false
 	if not tongue.set_target(point): return false
 	var target = get_viewport().canvas_transform.xform_inv(point)
 	set_flipped(target.x < position.x)
