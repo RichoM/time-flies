@@ -18,7 +18,6 @@ func _ready():
 	begin_start_sequence()
 
 func update_score(frog, bugs : Array):
-	# TODO(Richo): Change score by bug type
 	var count = bugs.size()
 	var score = 0
 	var multiplier
@@ -109,7 +108,6 @@ func check_tongues_crossing():
 			if collision:
 				f0.tongue_collision(collision)
 				f1.tongue_collision(collision)
-
 
 func _on_restart_button_pressed():
 	restart()
