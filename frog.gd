@@ -65,10 +65,14 @@ func display_points(points, multiplier):
 	var point_msg = preload("res://points.tscn").instance()
 	add_child(point_msg)
 	point_msg.position = $points.position
-	var msg = str(points)
+	var msg = str(abs(points))
+	if points >= 0:
+		msg = "+" + msg
+	else:
+		msg = "-" + msg
 	if multiplier > 1:
 		msg += "\nx" + str(multiplier)
-	point_msg.show_msg(msg, Color.green if points > 0 else Color.red)
+	point_msg.show_msg(msg, point_msg.GREEN if points > 0 else point_msg.RED)
 	if points < 0:
 		take_damage(points < -10)
 	else:
