@@ -29,13 +29,15 @@ func set_state(s):
 	emit_signal("state_changed", prev, state)
 
 func set_target(point):
-	if state != IDLE: return
+	if state != IDLE: return false
 	var screen_pos = get_viewport().canvas_transform.xform(global_position)
 	target = point - screen_pos
+	if target.y > -50: return false
 	vel = target.normalized() * speed
 	set_state(FWD)
 	line.points[1] = Vector2.ZERO
 	$sfx.play()
+	return true
 	
 func _process(delta):
 	line.visible = !is_idle()
