@@ -58,7 +58,7 @@ func _process(delta):
 		if remaining <= 0:
 			end_game()
 		elif remaining <= 10000:
-			$music.pitch_scale = 1.08
+			$music.pitch_scale = 1.05
 			$HUD/clock.modulate = Color("fbaba4")
 			$HUD/remaining_time.add_color_override("font_color", Color("f87a6f"))
 			
