@@ -39,7 +39,7 @@ func update_score(frog, bugs : Array):
 	total_score += score*multiplier
 	if total_score < 0:
 		total_score = 0
-	$GUI/score.text = str(total_score)
+	$HUD/score.text = str(total_score)
 
 func begin_start_sequence():
 	$AnimationPlayer.play("start_sequence")
@@ -60,11 +60,9 @@ func _process(delta):
 			
 func end_game():
 	started = false
-	$GUI/score.visible = false
-	$GUI/remaining_time.visible = false
+	$HUD.visible = false
 	$GameOver/message.text = "GAME OVER\nScore: " + str(total_score)
-	$GameOver/message.visible = true
-	$GameOver/restart_button.visible = true
+	$GameOver.visible = true
 	$fly_spawner.visible = false
 	$frogs.visible = false
 	$music.stop()
@@ -75,12 +73,12 @@ func restart():
 	
 func display_remaining(remaining):
 	if remaining < 0:
-		$GUI/remaining_time.text = "00:00"
+		$HUD/remaining_time.text = "00:00"
 	else:
 		var minutes = int(remaining / 60 / 1000)
 		var seconds = int(remaining / 1000) % 60
 		var miliseconds = int(remaining) % 1000
-		$GUI/remaining_time.text = ("%02d" % minutes) + (":%02d" % seconds)
+		$HUD/remaining_time.text = ("%02d" % minutes) + (":%02d" % seconds)
 
 func get_current_frog(): 
 	return frogs[index % frogs.size()]
