@@ -97,8 +97,6 @@ func _input(event):
 		var frog = get_current_frog()
 		if frog.set_target(event.position):
 			next_frog()
-			while get_current_frog().disabled and get_current_frog() != frog:
-				next_frog()
 		
 func check_tongues_crossing():
 	for i in range(frogs.size() - 1):
