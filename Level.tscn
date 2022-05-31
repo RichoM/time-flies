@@ -330,12 +330,15 @@ z_index = 300
 texture = ExtResource( 5 )
 
 [node name="WallLeft" type="Polygon2D" parent="."]
+position = Vector2( 1, 0 )
 z_index = 1000
+color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -529, -637, -529, 145, -1459, 145, -1459, -637 )
 
 [node name="WallRight" type="Polygon2D" parent="."]
 position = Vector2( 1987, 32 )
 z_index = 1000
+color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -529, -637, -529, 145, -1459, 145, -1459, -637 )
 
 [connection signal="pressed" from="GameOver/restart_button" to="." method="_on_restart_button_pressed"]
