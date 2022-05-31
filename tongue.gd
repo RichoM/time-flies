@@ -47,7 +47,8 @@ func _process(delta):
 			set_state(BWD)
 	if state == BWD:
 		line.points[1] -= (vel * delta)
-		if (Vector2.ZERO.distance_to(line.points[1]) < 10):
+		if (line.points[1].y >= 0):
+			line.points[1] = Vector2.ZERO
 			set_state(IDLE)
 			sticky = true
 			eat_bugs()
