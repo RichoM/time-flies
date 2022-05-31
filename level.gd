@@ -61,7 +61,9 @@ func _process(delta):
 			$music.pitch_scale = 1.05
 			$HUD/clock.modulate = Color("fbaba4")
 			$HUD/remaining_time.add_color_override("font_color", Color("f87a6f"))
-			
+	if begin_time != null:
+		var t = (OS.get_ticks_msec() - begin_time) / 1000.0
+		$GameOver/RestartButton.rotation_degrees = sin(t*2) * 2.5
 			
 func end_game():
 	started = false

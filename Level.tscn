@@ -35,6 +35,14 @@ animations = [ {
 "speed": 1.0
 } ]
 
+[sub_resource type="DynamicFont" id=9]
+size = 128
+outline_size = 10
+outline_color = Color( 0.145098, 0.168627, 0.254902, 1 )
+use_filter = true
+extra_spacing_char = 2
+font_data = ExtResource( 12 )
+
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 10 )
@@ -44,14 +52,6 @@ region = Rect2( 0, 0, 404, 357 )
 flags = 4
 atlas = ExtResource( 10 )
 region = Rect2( 404, 0, 404, 356 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 128
-outline_size = 10
-outline_color = Color( 0.145098, 0.168627, 0.254902, 1 )
-use_filter = true
-extra_spacing_char = 2
-font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 39
@@ -214,17 +214,6 @@ position = Vector2( 0, -67 )
 scale = Vector2( 0.7, 0.7 )
 z_index = 1000
 
-[node name="restart_button" type="TextureButton" parent="GameOver"]
-margin_left = -183.0
-margin_top = -195.0
-margin_right = 221.0
-margin_bottom = 162.0
-texture_normal = SubResource( 7 )
-texture_pressed = SubResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="message" type="Label" parent="GameOver"]
 margin_left = -372.857
 margin_top = -535.714
@@ -240,6 +229,19 @@ text = "GAME OVER
 Score: ???"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton" type="Node2D" parent="GameOver"]
+
+[node name="restart_button" type="TextureButton" parent="GameOver/RestartButton"]
+margin_left = -183.0
+margin_top = -195.0
+margin_right = 221.0
+margin_bottom = 162.0
+texture_normal = SubResource( 7 )
+texture_pressed = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -341,5 +343,5 @@ z_index = 1000
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -529, -637, -529, 145, -1459, 145, -1459, -637 )
 
-[connection signal="pressed" from="GameOver/restart_button" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="GameOver/RestartButton/restart_button" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="fly_spawner/timer" to="fly_spawner" method="_on_timer_timeout"]
