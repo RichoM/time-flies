@@ -32,7 +32,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="DynamicFont" id=1]
-size = 21
+size = 42
 font_data = ExtResource( 1 )
 
 [node name="points" type="Node2D"]
@@ -47,10 +47,10 @@ anims/evaporate = SubResource( 2 )
 [node name="label" type="Label" parent="msg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -23.0
-margin_top = -40.0
-margin_right = 21.0
-margin_bottom = 7.0
+margin_left = -31.0
+margin_top = -76.0
+margin_right = 32.0
+margin_bottom = 13.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "+20
