@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/Catamaran/static/Catamaran-ExtraBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://extra_time.gd" type="Script" id=2]
+[ext_resource path="res://sfx/eat.wav" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=2]
 resource_name = "evaporate"
@@ -43,6 +44,12 @@ script = ExtResource( 2 )
 
 [node name="player" type="AnimationPlayer" parent="."]
 anims/evaporate = SubResource( 2 )
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 11.0
+pitch_scale = 3.16
+autoplay = true
 
 [node name="seconds" type="Node2D" parent="."]
 

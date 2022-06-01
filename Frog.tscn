@@ -222,7 +222,7 @@ pitch_scale = 1.19
 
 [node name="eat_sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = 6.638
+volume_db = 11.638
 
 [node name="player" type="AnimationPlayer" parent="."]
 anims/appear = SubResource( 7 )
