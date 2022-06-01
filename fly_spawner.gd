@@ -3,10 +3,16 @@ extends Node2D
 onready var bugs = [preload("res://Fly.tscn"),
 					preload("res://Fly.tscn"),
 					preload("res://Fly.tscn"),
+					preload("res://Fly.tscn"),
+					preload("res://Fly.tscn"),
 					preload("res://Bee.tscn")]
+					
+var bee_count = 0
 
 func spawn_new_fly():
 	var proto = bugs[rand_range(0, bugs.size())]
+	if bee_count >= 4:
+		proto = bugs[0] 
 	var bug = proto.instance()
 	var x = 0
 	if randf() < 0.5:

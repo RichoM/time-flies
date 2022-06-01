@@ -12,6 +12,7 @@ onready var amp = rand_range(20, 30)
 onready var vel = rand_range(35, 60)
 
 func _ready():
+	get_parent().bee_count += 1
 	y = position.y
 	if position.x > 0:
 		vel *= -1
@@ -24,7 +25,9 @@ func _process(delta):
 		scale.y += 2*delta
 		modulate.a -= delta
 		if modulate.a <= 0.01:
+			get_parent().bee_count -= 1
 			get_parent().remove_child(self)
+			
 		return
 		
 	time += delta
@@ -34,8 +37,10 @@ func _process(delta):
 	var screen_pos = get_viewport().canvas_transform.xform(global_position)
 	var screen_rect = get_viewport_rect()
 	if vel > 0 and screen_pos.x > screen_rect.size.x + 25:
+		get_parent().bee_count -= 1
 		get_parent().remove_child(self)
-	if vel < 0 and screen_pos.x < 0 - 25:
+	elif vel < 0 and screen_pos.x < 0 - 25:
+		get_parent().bee_count -= 1
 		get_parent().remove_child(self)
 
 func fly_away():
