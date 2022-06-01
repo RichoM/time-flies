@@ -291,6 +291,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="extra_time" type="Position2D" parent="HUD"]
+position = Vector2( -384, -443 )
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -225 )
 current = true

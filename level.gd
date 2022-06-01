@@ -36,7 +36,14 @@ func update_score(frog, bugs : Array):
 		score = -10
 		multiplier = 1
 	frog.display_points(score, multiplier)
-	total_score += score*multiplier
+	var extra_score = score*multiplier
+	if extra_score >= 100:
+		time += 10000
+		var extra_time = preload("res://extra_time.tscn").instance()
+		extra_time.position = $HUD/extra_time.position
+		extra_time.show_seconds(10)
+		$HUD.add_child(extra_time)
+	total_score += extra_score
 	if total_score < 0:
 		total_score = 0
 	$HUD/score.text = str(total_score)
@@ -61,6 +68,10 @@ func _process(delta):
 			$music.pitch_scale = 1.05
 			$HUD/clock.modulate = Color("fbaba4")
 			$HUD/remaining_time.add_color_override("font_color", Color("f87a6f"))
+		else:
+			$music.pitch_scale = 1.0
+			$HUD/clock.modulate = Color.white
+			$HUD/remaining_time.add_color_override("font_color", Color.white)
 	if begin_time != null:
 		var t = (OS.get_ticks_msec() - begin_time) / 1000.0
 		$GameOver/RestartButton.rotation_degrees = sin(t*2) * 2.5
