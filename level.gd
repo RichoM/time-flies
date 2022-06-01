@@ -8,14 +8,34 @@ var begin_time
 var started = false
 var total_score = 0
 
+const SCORE_FILE_PATH = "user://max_score.bin"
+var max_score = 0
+
 onready var index = 0
 onready var frogs = get_node(frogs_path).get_children()
 
 func _ready():
 	randomize()
+	read_max_score()
 	for frog in frogs:
 		frog.connect("bugs_eaten", self, "update_score")
 	begin_start_sequence()
+	
+func read_max_score():
+	var score_file = File.new()
+	var error = score_file.open(SCORE_FILE_PATH, File.READ)
+	
+	max_score = score_file.get_64()
+	score_file.close()
+	$HUD/max_score.text = str(max_score)
+	
+func write_max_score(score):
+	max_score = score
+	var score_file = File.new()
+	score_file.open(SCORE_FILE_PATH, File.WRITE)
+	score_file.store_64(max_score)
+	score_file.close()
+	
 
 func update_score(frog, bugs : Array):
 	var count = bugs.size()
@@ -47,6 +67,8 @@ func update_score(frog, bugs : Array):
 	if total_score < 0:
 		total_score = 0
 	$HUD/score.text = str(total_score)
+	if total_score > max_score:
+		$HUD/score.add_color_override("font_color", Color("68db7d"))
 
 func begin_start_sequence():
 	$AnimationPlayer.play("start_sequence")
@@ -79,7 +101,12 @@ func _process(delta):
 func end_game():
 	started = false
 	$HUD.visible = false
-	$GameOver/message.text = "GAME OVER\nScore: " + str(total_score)
+	if total_score > max_score:
+		write_max_score(total_score)
+		$GameOver/message_top.text = "NEW HIGHSCORE!"
+	else:
+		$GameOver/message_top.text = "GAME OVER"
+	$GameOver/message_bottom.text = "Score: " + str(total_score)
 	$GameOver.visible = true
 	$fly_spawner.visible = false
 	$frogs.visible = false
