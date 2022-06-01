@@ -69,6 +69,8 @@ func update_score(frog, bugs : Array):
 	$HUD/score.text = str(total_score)
 	if total_score > max_score:
 		$HUD/score.add_color_override("font_color", Color("68db7d"))
+	else: 
+		$HUD/score.add_color_override("font_color", Color.white)
 
 func begin_start_sequence():
 	$AnimationPlayer.play("start_sequence")
