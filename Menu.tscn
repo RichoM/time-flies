@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://fly_spawner.gd" type="Script" id=1]
+[ext_resource path="res://assets/clock.png" type="Texture" id=2]
 [ext_resource path="res://assets/background.png" type="Texture" id=4]
 [ext_resource path="res://assets/juncos.png" type="Texture" id=5]
 [ext_resource path="res://music/02-Ingame-Chiptune FM-loop.ogg" type="AudioStream" id=6]
@@ -30,6 +31,11 @@ texture = ExtResource( 4 )
 position = Vector2( 0, -347 )
 z_index = 200
 texture = ExtResource( 8 )
+
+[node name="Clock" type="Sprite" parent="."]
+position = Vector2( -85, -489 )
+z_index = 1000
+texture = ExtResource( 2 )
 
 [node name="PlayButton" type="Node2D" parent="."]
 position = Vector2( -2.38419e-07, -59 )
