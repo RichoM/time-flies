@@ -105,6 +105,7 @@ func end_game():
 	$HUD.visible = false
 	if total_score > max_score:
 		write_max_score(total_score)
+		$GameOver/highscore_animation.play("blink")
 		$GameOver/message_top.text = "NEW HIGHSCORE!"
 	else:
 		$GameOver/message_top.text = "GAME OVER"
