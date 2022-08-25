@@ -8,7 +8,7 @@ var begin_time
 var started = false
 var total_score = 0
 
-const SCORE_FILE_PATH = "user://max_score.bin"
+const SCORE_FILE_PATH = "user://max_score.frogs.bin"
 var max_score = 0
 
 onready var index = 0
